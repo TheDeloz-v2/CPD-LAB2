@@ -5,6 +5,7 @@
 #include <fstream>
 #include <ctime>
 #include <chrono>
+#include <omp.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -67,6 +68,7 @@ int read_numbers(int* numbers, const string& filename) {
  * @param n         The number of elements in the array.
  */
 void generate_numbers(int* numbers, int n) {
+    #pragma omp parallel for // Parallelize the generation of numbers
     for (int i = 0; i < n; i++) {
         numbers[i] = rand() % 100000000;
     }
